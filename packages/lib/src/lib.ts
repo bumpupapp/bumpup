@@ -6,11 +6,7 @@ import {
     BumpupPlugin,
     isFunctionWithOptions
 } from "../../common/mod.ts";
-import {path} from "../../../deps.ts";
-import {ConfigNotFoundError} from "./ConfigNotFoundError.ts";
 import {PluginExecutionError} from "./PluginExecutionError.ts";
-import {InvalidConfigError} from "./InvalidConfigError.ts";
-import {assertRejects} from "https://deno.land/std@0.165.0/testing/asserts.ts";
 import {UnknownConfigError} from "./UnknownConfigError.ts";
 
 /**
@@ -49,3 +45,5 @@ export const composePlugins = async (plugins: BumpupPlugin[], options: BumpupOpt
     }
     return value
 };
+
+
