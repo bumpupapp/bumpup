@@ -1,4 +1,6 @@
-export type BumpupOptions = {
+// deno-lint-ignore no-explicit-any
+export type BumpupOptions = Record<any, any>
+    // {
   // TODO: make mandatory
   // dry?: boolean;
   // TODO: Remove from global options because its to specific to git
@@ -9,5 +11,5 @@ export type BumpupOptions = {
   // log?: "critical" | "error" | "warning" | "info" | "debug";
   //TODO: make mandatory
   // file?: string;
-  [key: string]: any
-};
+  // [key: string]: Record<unknown, unknown>
+// };

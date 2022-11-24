@@ -43,17 +43,22 @@ class BackBlazeClient {
     }
 }
 
+let backblazeConfig = {}
+try{
+    backblazeConfig = JSON.parse(await Deno.readTextFile('env.json'))
+}catch{
+    if(Deno.env.get("B2_ACCESS_KEY")){
+        backblazeConfig.accessKey = Deno.env.get("B2_ACCESS_KEY")
+    }
+    if(Deno.env.get("B2_SECRET_KEY")){
+        backblazeConfig.secretKey = Deno.env.get("B2_SECRET_KEY")
+    }
+    if(Deno.env.get("B2_BUCKET_ID")){
+        backblazeConfig.bucketId = Deno.env.get("B2_BUCKET_ID")
+    }
+}
+const {accessKey, secretKey, bucketId} = backblazeConfig
 
-let {accessKey, secretKey, bucketId} = JSON.parse(await Deno.readTextFile('env.json'))
-if(Deno.env.get("B2_ACCESS_KEY")){
-    accessKey = Deno.env.get("B2_ACCESS_KEY")
-}
-if(Deno.env.get("B2_SECRET_KEY")){
-    secretKey = Deno.env.get("B2_SECRET_KEY")
-}
-if(Deno.env.get("B2_BUCKET_ID")){
-    bucketId = Deno.env.get("B2_BUCKET_ID")
-}
 const client = new BackBlazeClient(accessKey, secretKey, bucketId)
 
 

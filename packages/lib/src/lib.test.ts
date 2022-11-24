@@ -1,10 +1,8 @@
-import {assertEquals, assertRejects, assertThrows, beforeEach, describe, it} from "../../../dev_deps.ts";
+import {assertEquals, assertRejects, beforeEach, describe, it} from "../../../dev_deps.ts";
 import {BumpupPlugin} from "../../common/src/BumpupPlugin.ts";
 import {composePlugins, runConfig} from "./lib.ts";
 import {PluginExecutionError} from "./PluginExecutionError.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
-import {ConfigNotFoundError} from "./ConfigNotFoundError.ts";
-import {InvalidConfigError} from "./InvalidConfigError.ts";
 import {UnknownConfigError} from "./UnknownConfigError.ts";
 
 describe('module lib', () => {
@@ -32,7 +30,7 @@ describe('module lib', () => {
             assertRejects(() =>composePlugins([optionPlugin, throwAsync, asyncPlugin]), PluginExecutionError)
         })
     })
-    describe('function runConfig()', async ()=>{
+    describe('function runConfig()', ()=>{
         let dir: string, url: URL;
         beforeEach(async ()=>{
             dir = await Deno.makeTempDir();
