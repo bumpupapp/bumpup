@@ -1,0 +1,7 @@
+services:
+  lcov:
+    build:
+      context: .
+    volumes:
+      - ./:/app/src
+# genhtml coverage/coverage.lcov -o coverage/html

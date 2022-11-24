@@ -1,13 +1,13 @@
 export type BumpupOptions = {
   // TODO: make mandatory
-  dry?: boolean;
+  // dry?: boolean;
   // TODO: Remove from global options because its to specific to git
-  pre?: boolean;
+  // pre?: boolean;
   // TODO: Remove from global options because its to specific to git
-  preid?: string;
+  // preid?: string;
   //TODO: make mandatory
-  log?: "critical" | "error" | "warning" | "info" | "debug";
+  // log?: "critical" | "error" | "warning" | "info" | "debug";
   //TODO: make mandatory
-  file?: string;
+  // file?: string;
   [key: string]: any
 };

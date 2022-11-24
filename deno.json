@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "test": "deno test -A --coverage=$(pwd)/coverage/raw",
+    "coverage": "deno coverage --exclude=bumpup.config.ts --exclude='e2e/*' --exclude='.*.test.ts'  --lcov --output=coverage/coverage.lcov coverage/raw"
+  }
+}

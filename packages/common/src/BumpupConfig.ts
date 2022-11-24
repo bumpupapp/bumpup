@@ -1,6 +1,10 @@
 import { BumpupPlugin } from "./BumpupPlugin.ts";
 
-export type BumpupConfig = {
-  version: string;
+
+export type BumpupConfigV210 = {
+  version: '2.1.0'
+  options?: Record<any, any>
   plugins: BumpupPlugin[];
-};
+}
+
+export type BumpupConfig = BumpupConfigV210
