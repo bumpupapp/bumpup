@@ -17,7 +17,9 @@ jobs:
         with:
           deno-version: '1.28'
       - name: release
-        run: deno run -A publish.ts
+        run: |
+          deno run -A time.ts
+          deno run -A publish.ts
         env:
           "B2_ACCESS_KEY": ${{secrets.B2_ACCESS_KEY}}
           "B2_SECRET_KEY": ${{secrets.B2_SECRET_KEY}}

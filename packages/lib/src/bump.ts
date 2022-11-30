@@ -6,23 +6,24 @@ import {
     BumpupPlugin,
     isFunctionWithOptions
 } from "../../common/mod.ts";
-import {PluginExecutionError} from "./PluginExecutionError.ts";
-import {UnknownConfigError} from "./UnknownConfigError.ts";
+import {PluginExecutionError} from "./errors/PluginExecutionError.ts";
 
 /**
  * Loads the config from a given {url} and runs the steps defined in the config
- * @param url
+ * @param config
  * @param options
  */
-export const runConfig = async (url: URL, options: BumpupOptions = {}): Promise<BumpupData> => {
-    let config: BumpupConfig;
-    try {
-        config = (await import(url.href)).default
-    } catch (e) {
-        // TODO: better distinguish between errors
-        throw new UnknownConfigError(e.message,e)
+// deno-lint-ignore no-explicit-any
+export const bump = (config: BumpupConfig, options: Record<any,any>=  {}): Promise<BumpupData> => {
+    const o: BumpupOptions = {
+        dry: false,
+        file: 'bumpup.config.ts',
+        log: 'critical',
+        ...(config.options || {}),
+        ...options
     }
-    return composePlugins(config.plugins, {...config.options, options})
+
+    return composePlugins(config.plugins, o)
 }
 
 /**
@@ -30,7 +31,7 @@ export const runConfig = async (url: URL, options: BumpupOptions = {}): Promise<
  * @param plugins
  * @param options
  */
-export const composePlugins = async (plugins: BumpupPlugin[], options: BumpupOptions = {}): Promise<BumpupData> => {
+export const composePlugins = async (plugins: BumpupPlugin[], options: BumpupOptions): Promise<BumpupData> => {
     let value = {}
     const pluginFunctions = plugins
         .map(plugin => isFunctionWithOptions(plugin) ? plugin : [plugin, {}] as [BumpupFunction, BumpupOptions])
@@ -45,5 +46,3 @@ export const composePlugins = async (plugins: BumpupPlugin[], options: BumpupOpt
     }
     return value
 };
-
-
