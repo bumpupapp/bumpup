@@ -62,7 +62,7 @@ const {accessKey, secretKey, bucketId} = backblazeConfig
 const client = new BackBlazeClient(accessKey, secretKey, bucketId)
 
 
-for await (const entry of walk('.',{match: [globToRegExp('packages/**/*.{json,ts}')]})) {
+for await (const entry of walk('.',{match: [globToRegExp('packages/**/*.{json,ts}'),globToRegExp('version.json')]})) {
     const fileName = `legacy/bumpup/${entry.path.replaceAll('\\','/').replaceAll('packages/','')}`
     const file = await Deno.readTextFile(path.join('.',entry.path))
     await client.uploadString(fileName,file)
