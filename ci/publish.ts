@@ -2,6 +2,7 @@ import {walk} from "https://deno.land/std@0.165.0/fs/walk.ts";
 import {globToRegExp} from "https://deno.land/std@0.158.0/path/glob.ts";
 import * as path from "https://deno.land/x/std@0.158.0/path/mod.ts";
 import { Sha1 } from "https://deno.land/std@0.160.0/hash/sha1.ts"
+import { dirname, basename } from "https://deno.land/std@0.166.0/path/posix.ts";
 
 class BackBlazeClient {
     constructor(private accessKey: string, private secretKey: string, private bucketId: string) {
@@ -63,14 +64,13 @@ const client = new BackBlazeClient(accessKey, secretKey, bucketId)
 
 
 const globs = [
-    'packages/**/*.{json,ts}',
-    'version.json',
-    'deps.ts',
+    'build/*.bundle.ts'
 ]
 const cwd = '.'
 const baseDir= '@bumpup'
 for await (const entry of walk(cwd,{match: globs.map(globToRegExp)})) {
-    const fileName = `${baseDir}/${entry.path.replaceAll('\\','/')}`
+    const posixPath = entry.path.replaceAll('\\','/')
+    const fileName = `${baseDir}/${basename(posixPath)}`
     const file = await Deno.readTextFile(path.join('.',entry.path))
     await client.uploadString(fileName,file)
     console.log(`Uploaded ${fileName}`)

@@ -2,3 +2,4 @@
 coverage/
 *.lock
 env.json
+build/
