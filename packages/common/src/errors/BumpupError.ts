@@ -10,3 +10,5 @@ export class WrappedBumpupError extends BumpupError {
     }
 }
 
+export class FileNotFoundError extends BumpupError {
+}

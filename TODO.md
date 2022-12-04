@@ -17,3 +17,5 @@
 //TODO: https://clig.dev/
 
 //TODO: remove logger from top level
+
+//TODO: extract dependencies to deps.ts and use same version of std

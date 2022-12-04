@@ -23,6 +23,7 @@ bump
                 logger.log('error', 'ConfigFileNotFoundError')
             }else if(e instanceof ModuleBuildError){
                 logger.log('error', 'ModuleBuildError')
+                logger.log('debug', e.message)
             }else if(e instanceof PluginExecutionError){
                 logger.log('error', 'PluginExecutionError\n'+e.originalError)
             }else{

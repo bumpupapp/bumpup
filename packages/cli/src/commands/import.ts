@@ -1,8 +1,6 @@
 import * as esbuild from 'https://deno.land/x/esbuild@v0.15.16/mod.js'
-import httpFetch from 'https://deno.land/x/esbuild_plugin_http_fetch@v1.0.2/index.js'
-
-const AsyncFunction = async function () {
-}.constructor
+import httpFetch from "./httpfetch.ts";
+const AsyncFunction = async function () {}.constructor
 
 export const build = async (options: Record<string, unknown>) => {
     try{
@@ -13,6 +11,9 @@ export const build = async (options: Record<string, unknown>) => {
             plugins: [httpFetch],
             minify: true,
             logLevel: 'silent',
+            loader: {
+                '.ts':'ts'
+            },
             format: 'esm',
             ...options
         })
@@ -20,6 +21,7 @@ export const build = async (options: Record<string, unknown>) => {
         return output.outputFiles?.[0].text
     }catch(e){
         esbuild.stop()
+        console.log(e)
         throw new ModuleBuildError(e)
     }
 }
