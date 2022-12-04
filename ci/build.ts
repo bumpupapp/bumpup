@@ -14,3 +14,13 @@ for await (const entry of walk(cwd,{match: globs.map(globToRegExp)})) {
     const pkg = basename(dirname(fullPath))
     await exec(`bash -c "deno bundle ${fullPath} > build/${pkg}.bundle.ts"`)
 }
+const archs = [
+    {name: 'x86_64-unknown-linux-gnu', prefix:'bumpup_linux_x68'},
+    {name: 'x86_64-pc-windows-msvc', prefix:'bumpup.exe'},
+    {name: 'x86_64-apple-darwin', prefix:'bumpup_darwin_x86'},
+    {name: 'aarch64-apple-darwin', prefix:'bumpup_darwin_aarch64'},
+]
+
+await Promise.allSettled(archs.map(({name, prefix})=>{
+    return exec(`bash -c "deno compile -A --target ${name} --output build/${prefix} packages/cli/mod.ts"`)
+}))

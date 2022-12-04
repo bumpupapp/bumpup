@@ -7,7 +7,7 @@ program
     .name('bumpup')
     .description('cli tool to version your software')
     .version(versionFile.version+"+"+versionFile.buildtime)
-    .addOption(new Option('-l, --log <loglevel>').choices(["critical", "error", "warning", "info", "debug"]).default('critical'))
+    .addOption(new Option('-l, --log <loglevel>').choices(["error", "success", "warning", "info", "debug"]).default('success'))
     .addOption(new Option('-d, --dry').default(false))
     .addOption(new Option('-f, --file <file>').default('bumpup.config.ts'))
     .addCommand(bump, {isDefault: true})

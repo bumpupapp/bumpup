@@ -4,4 +4,5 @@ services:
       context: .
     volumes:
       - ./:/app/src
+#docker compose run --rm -it lcov
 # genhtml coverage/coverage.lcov -o coverage/html
