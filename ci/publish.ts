@@ -3,6 +3,7 @@ import {globToRegExp} from "https://deno.land/std@0.158.0/path/glob.ts";
 import * as path from "https://deno.land/x/std@0.158.0/path/mod.ts";
 import { Sha1 } from "https://deno.land/std@0.160.0/hash/sha1.ts"
 import { basename } from "https://deno.land/std@0.166.0/path/posix.ts";
+import {exec} from "https://deno.land/x/exec/mod.ts";
 
 class BackBlazeClient {
     constructor(private accessKey: string, private secretKey: string, private bucketId: string) {
@@ -75,6 +76,14 @@ for await (const entry of walk(cwd,{match: globs.map(globToRegExp)})) {
     await client.uploadString(fileName,file)
     console.log(`Uploaded ${fileName}`)
 }
-
-const file = await Deno.readFile(path.join('.','build/bumpup.exe'))
-await client.uploadString('binaries/bumpup.exe', file)
+const archs = [
+    {name: 'x86_64-unknown-linux-gnu', prefix:'bumpup_linux_x68'},
+    {name: 'x86_64-pc-windows-msvc', prefix:'bumpup.exe'},
+    {name: 'x86_64-apple-darwin', prefix:'bumpup_darwin_x86'},
+    {name: 'aarch64-apple-darwin', prefix:'bumpup_darwin_aarch64'},
+]
+await Promise.allSettled(archs.map(({name, prefix})=>{
+    return  Deno.readFile(path.join(Deno.cwd(),`build/${prefix}`))
+        .then(file=>client.uploadString(`binaries/${prefix}`, file))
+        .then(()=>console.log(`Uploaded ${prefix}`))
+}))
