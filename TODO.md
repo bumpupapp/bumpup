@@ -19,3 +19,5 @@
 //TODO: remove logger from top level
 
 //TODO: extract dependencies to deps.ts and use same version of std
+
+// TODO: add scopes to errors, like packages
