@@ -1,5 +1,5 @@
 import { BumpupFunction } from "../../common/mod.ts";
-import * as path from "https://deno.land/x/std@0.158.0/path/mod.ts";
+import {path} from '../../../package_deps.ts';
 import {FileNotFoundError} from "../../common/src/errors/BumpupError.ts";
 import {FileNotParseableError} from "./errors/FileNotParseableError.ts";
 import {KeyNotFoundError} from "./errors/KeyNotFoundError.ts";

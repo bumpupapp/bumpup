@@ -4,7 +4,6 @@ import {
     it,
     path
 } from "../../../dev_deps.ts"
-import {read} from './read.ts'
 import {FileNotFoundError} from "../../common/src/errors/BumpupError.ts";
 import {FileNotParseableError} from "./errors/FileNotParseableError.ts";
 import {write} from "./write.ts";
