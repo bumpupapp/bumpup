@@ -1,20 +1,43 @@
 import { BumpupFunction } from "../../common/mod.ts";
 import * as path from "https://deno.land/x/std@0.158.0/path/mod.ts";
+import {FileNotFoundError} from "../../common/src/errors/BumpupError.ts";
+import {FileNotParseableError} from "./errors/FileNotParseableError.ts";
+import {KeyNotFoundError} from "./errors/KeyNotFoundError.ts";
+import {FileNotWriteableError} from "./errors/FileNotWriteableError.ts";
+import {Logger} from "../../../Logger.ts";
 
 export const write: BumpupFunction = (options) => async (data) => {
-    //TODO: Error handling for file not found
-    // @ts-ignore: remove
+    const logger = new Logger(options.log)
+    console.log(data)
+    if(!data.newVersion){
+        logger.log('info',`key 'newVersion' not found in data`)
+        return data;
+    }
     const file = options.jsonFile || "package.json";
     const key = options.jsonKey || "version";
-
-    //@ts-ignore: remove
     const url = path.toFileUrl(path.resolve(file));
+    let content
+    try{
+        content = await Deno.readTextFile(url);
+    }catch{
+        throw new FileNotFoundError()
+    }
+    let json
+    try{
+        json = JSON.parse(content);
+    }catch{
+        throw new FileNotParseableError()
+    }
+    const version = json[key]
+    if(!version){
+        throw new KeyNotFoundError()
+    }
 
-    //@ts-ignore: remove
-    const json = JSON.parse(await Deno.readTextFile(url));
-    //@ts-ignore: remove
     json[key] = data.newVersion;
-    //@ts-ignore: remove
-    await Deno.writeTextFile(url, JSON.stringify(json, null, 4));
+    try{
+        await Deno.writeTextFile(url, JSON.stringify(json, null, 4));
+    }catch{
+        throw new FileNotWriteableError()
+    }
     return data;
 };

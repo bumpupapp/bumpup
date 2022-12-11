@@ -7,6 +7,7 @@ import {
 import {read} from './read.ts'
 import {FileNotFoundError} from "../../common/src/errors/BumpupError.ts";
 import {FileNotParseableError} from "./errors/FileNotParseableError.ts";
+import {KeyNotFoundError} from "./errors/KeyNotFoundError.ts";
 
 describe('@bumpup/json',()=>{
     describe('read', ()=>{
@@ -30,6 +31,13 @@ describe('@bumpup/json',()=>{
             await Deno.writeTextFile(file,`bogusjson`)
             Deno.chdir(dir);
             await assertRejects(async()=>await read({dry:false,log:'debug',file:''})({}),FileNotParseableError)
+        })
+        it('should throw if the key cannot be parsed',async()=>{
+            const dir = await Deno.makeTempDir();
+            const file = path.join(dir, 'package.json')
+            await Deno.writeTextFile(file,`{"boguskey":"1.0.0"}`)
+            Deno.chdir(dir);
+            await assertRejects(async()=>await read({dry:false,log:'debug',file:''})({}),KeyNotFoundError)
         })
     })
 })
