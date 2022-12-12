@@ -1,5 +1,5 @@
 import {createTag, getGitSubmodulesDir} from "./helpers.ts";
-import { BumpupData, BumpupOptions } from "https://raw.githubusercontent.com/bumpupapp/common/main/mod.ts";
+import { BumpupData, BumpupOptions } from "../../common/mod.ts";
 import { fs, git, log } from "../deps.ts";
 export default (options: BumpupOptions) => async (data: BumpupData) => {
   if (options.dry) {
