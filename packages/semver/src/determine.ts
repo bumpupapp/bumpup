@@ -17,7 +17,6 @@ const determine: BumpupFunction = (options) => (data) => {
       return {newVersion: data.version }
     }
     const releaseIdentifier = options.pre ? `pre${data.type}` : data.type;
-    console.log(releaseIdentifier)
     const newVersion = semver.increment(data.version, releaseIdentifier,options.preid) as string
     return {newVersion}
   };

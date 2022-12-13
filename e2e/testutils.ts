@@ -27,18 +27,21 @@ export const addFileToDir =
   };
 
 export const setupBumpup = async (dir: string) => {
-  const bumpup = `
+    const bumpup = `
 import {read, write} from "${
-    slash(path.join(Deno.cwd(), "packages/json/mod.ts"))
-  }";
+        slash(path.join(path.dirname(path.fromFileUrl(import.meta.url),),'..', "packages/json/mod.ts"))
+    }";
 import {type, record, commit} from "${
-    slash(path.join(Deno.cwd(), "packages/git/mod.ts"))
-  }";
+        slash(path.join(path.dirname(path.fromFileUrl(import.meta.url)),'..', "packages/git/mod.ts"))
+    }";
 import determine from "${
-    slash(path.join(Deno.cwd(), "packages/semver/mod.ts"))
-  }";
+        slash(path.join(path.dirname(path.fromFileUrl(import.meta.url)),'..', "packages/semver/mod.ts"))
+    }";
 export default {
     version: "2.0.0",
+    options: {
+        log: 'debug'
+    },
     plugins: [
         read,
         type,

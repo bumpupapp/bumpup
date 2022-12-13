@@ -12,7 +12,7 @@ export const read: BumpupFunction = (options: BumpupOptions) => async (_: unknow
     try{
         content = await Deno.readTextFile(url);
     }catch{
-        throw new FileNotFoundError()
+        throw new FileNotFoundError('FileNotFoundError')
     }
     let json
     try{
