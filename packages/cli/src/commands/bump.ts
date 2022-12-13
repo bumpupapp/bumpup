@@ -2,7 +2,7 @@ import {Command, path} from '../../../../deps.ts'
 import {bump as libBump} from "../../../lib/mod.ts";
 import {BumpupConfig} from "../../../common/mod.ts";
 import {UnknownConfigError} from "../errors/UnknownConfigError.ts";
-import {importModule, ModuleBuildError} from "https://raw.githubusercontent.com/danielr1996/import/main/mod.ts";
+import {importModule,ModuleBuildError} from "https://raw.githubusercontent.com/danielr1996/import/main/mod.ts";
 import {ConfigFileNotFoundError} from "../errors/ConfigFileNotFoundError.ts";
 import {PluginExecutionError} from "../../../lib/mod.ts";
 import {Logger} from "../../../../Logger.ts";
