@@ -18,7 +18,8 @@ jobs:
         run: deno run -A https://packages.danielr1996.de/@bumpup/cli/bundle.ts bump
       - name: push
         run: |
+          git branch
           cat version.json
-          git log --oneline
           git tag
+          git push
           git push --tags
