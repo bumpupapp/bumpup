@@ -19,6 +19,7 @@ jobs:
       - name: release
         run: |
           deno run -A ci/build.ts          
+          find packages/
           deno run -A ci/copy.ts
           deno run -A ci/publish.ts
         env:
