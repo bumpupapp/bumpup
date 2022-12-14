@@ -22,5 +22,6 @@ const copy = async ({files, version}) => {
 
 }
 const version = JSON.parse(await Deno.readTextFile('version.json')).version
+console.log(version)
 const files = (await toArray(expandGlob('build/*'))).map(entry=>entry.path)
 await copy({files, version})
