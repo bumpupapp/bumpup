@@ -1,7 +1,7 @@
 name: 'Tag'
 on:
   repository_dispatch:
-    tyoes: [pipeline/tag]
+    types: [pipeline/tag]
 jobs:
   tag:
     runs-on: 'ubuntu-latest'
@@ -21,4 +21,4 @@ jobs:
           cat version.json
           git log --oneline
           git tag
-          git push
+          git push --tags
