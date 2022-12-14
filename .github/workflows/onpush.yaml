@@ -1,5 +1,7 @@
 name: 'On Push Pipeline'
-on: [push]
+on:
+  push:
+    branches: ['**']
 jobs:
   qualitygate:
     name: 'Quality Gate'
