@@ -5,7 +5,7 @@ import {getGitSubmodulesDir} from "./helpers.ts";
 export default (options: {author: {email: string, name: string}}) => async (data: BumpupData) => {
   if (data.newVersion !== data.version) {
     const gitdir = await getGitSubmodulesDir('.git')
-    //@ts-ignore: remove
+    await git.add({ fs,dir: Deno.cwd(), filepath: '.' });
     await git.commit({
       fs,
       author: options.author,
@@ -16,3 +16,4 @@ export default (options: {author: {email: string, name: string}}) => async (data
   }
   return data;
 };
+
