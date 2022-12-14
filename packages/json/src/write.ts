@@ -8,7 +8,6 @@ import {Logger} from "../../../Logger.ts";
 
 export const write: BumpupFunction = (options) => async (data) => {
     const logger = new Logger(options.log)
-    console.log(data)
     if(!data.newVersion){
         logger.log('info',`key 'newVersion' not found in data`)
         return data;
