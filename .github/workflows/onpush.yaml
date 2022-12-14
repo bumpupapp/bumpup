@@ -7,8 +7,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PAT }}
       - name: setup deno
         uses: denoland/setup-deno@v1
         with:
@@ -27,6 +25,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.PAT }}
           fetch-depth: 0
       - name: setup bumpup
         uses: danielr1996/gh-actions-bumpup@v9
