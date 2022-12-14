@@ -1,8 +1,7 @@
 name: 'On Tag Pipeline'
 on:
   push:
-    tags:
-      - '**'
+    tags: ['*']
 jobs:
   build:
     name: 'Build'
