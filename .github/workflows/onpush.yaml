@@ -38,21 +38,16 @@ jobs:
           deno-version: 'v1.x'
       - name: setup bumpup
         uses: danielr1996/gh-actions-bumpup@v9
-      - run: cat version.json
       - name: bump
         run: bumpup bump
-      - run: cat version.json
       - name: push
         run: | 
           git push
           git push --tags
       - name: build
         run: |
-          cat version.json
           deno run -A ci/build.ts
-          cat version.json
           deno run -A ci/copy.ts
-          cat version.json
           deno run -A ci/copyversions.ts
       - name: publish
         run: deno run -A ci/publish.ts
