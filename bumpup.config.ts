@@ -10,7 +10,7 @@ export default {
         determineIncrement,
         [write, jsonOptions],
         [commit, gitOptions],
-        // [record, gitOptions],
+        [record, gitOptions],
         ()=>(data)=>console.log(data),
     ]
 }
