@@ -1,0 +1,25 @@
+name: 'Tag'
+on:
+  repository_dispatch:
+    types: [pipeline/tag]
+jobs:
+  tag:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: 'v1.x'
+      - name: tag
+        run: deno run -A https://packages.danielr1996.de/@bumpup/cli/bundle.ts bump
+      - name: push
+        run: |
+          git branch
+          cat version.json
+          git tag
+          git push
+          git push --tags
