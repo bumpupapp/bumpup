@@ -1,7 +1,8 @@
 name: 'On Push Pipeline'
 on:
+  workflow_dispatch:
   push:
-    branches: ['**']
+    tags_ignore: ['**']
 jobs:
   qualitygate:
     name: 'Quality Gate'

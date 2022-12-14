@@ -1,5 +1,6 @@
 name: 'On Tag Pipeline'
 on:
+  workflow_dispatch:
   push:
     tags: ['**']
 jobs:
