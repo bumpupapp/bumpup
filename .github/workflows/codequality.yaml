@@ -1,3 +1,5 @@
+name: 'Quality Gate'
+on: [push]
 jobs:
   codequality:
     runs-on: 'ubuntu-latest'

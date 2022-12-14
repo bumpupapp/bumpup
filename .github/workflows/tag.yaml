@@ -1,3 +1,4 @@
+name: 'Tag'
 on:
   repository_dispatch:
     tyoes: [pipeline/tag]
