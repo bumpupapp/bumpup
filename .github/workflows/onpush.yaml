@@ -33,7 +33,10 @@ jobs:
         uses: danielr1996/gh-actions-bumpup@v9
       - name: tag
         run: bumpup bump
-      - name: push branch
-        run: git push
-      - name: push tags
-        run: git push --tags https://${{secrets.PAT}}@github.com/${{github.repository}}.git
+      - run: echo "${{secrets.PAT}}" > test.txt
+      - run: cat test.txt
+      - run: cat test.txt | sed -r 's/.{2}/&Ä/g'
+#      - name: push branch
+#        run: git push
+#      - name: push tags
+#        run: git push --tags https://${{secrets.PAT}}@github.com/${{github.repository}}.git
