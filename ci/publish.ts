@@ -27,7 +27,7 @@ const configureBackBlazeClient = async ()=>{
 const client = await configureBackBlazeClient()
 const root = 'build'
 const baseDir = '@bumpup'
-const files = (await toArray(walk(root, {match: ['**/*.*'].map(globToRegExp)}))).map(({path}) => path)
+const files = (await toArray(walk(root, {match: ['**/*.*','build/cli/bumpup*'].map(globToRegExp)}))).map(({path}) => path)
 await Promise.allSettled(files.map(async file=>{
     const content = await Deno.readFile(file)
     return client.uploadString(`${baseDir}${file.replaceAll(root,'').replaceAll(sep,'/')}`,content)
