@@ -8,9 +8,9 @@ export default {
     plugins: [
         [read, jsonOptions],
         determineIncrement,
-        [commit, gitOptions]
-        [record, gitOptions],
         [write, jsonOptions],
-        ()=>(data)=>console.log(data)
+        [commit, gitOptions],
+        [record, gitOptions],
+        ()=>(data)=>console.log(data),
     ]
 }

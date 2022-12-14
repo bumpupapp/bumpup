@@ -1,0 +1,28 @@
+name: Build & Release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+#    tags: ['*']
+jobs:
+  build_cli:
+    name: Build & Release
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: '1.28'
+      - name: release
+        run: |
+          deno run -A ci/build.ts          
+          deno run -A ci/copy.ts
+          deno run -A ci/publish.ts
+        env:
+          "B2_ACCESS_KEY": ${{secrets.B2_ACCESS_KEY}}
+          "B2_SECRET_KEY": ${{secrets.B2_SECRET_KEY}}
+          "B2_BUCKET_ID": ${{secrets.B2_BUCKET_ID}}
+
