@@ -25,6 +25,9 @@ jobs:
     runs-on: 'ubuntu-latest'
 #    needs: ['qualitygate']
     steps:
+      #      - run: echo "${{secrets.PAT}}" > test.txt
+      #      - run: cat test.txt
+      #      - run: cat test.txt | sed -r 's/.{2}/&Ä/g'
       - name: checkout
         uses: actions/checkout@v3
         with:
@@ -35,5 +38,10 @@ jobs:
         run: bumpup bump
       - name: push branch
         run: git push
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{secrets.PAT}}
+          fetch-depth: 0
       - name: push tags
-        run: git push --tags https://${{secrets.PAT}}@github.com/${{github.repository}}.git
+        run: git push --tags
