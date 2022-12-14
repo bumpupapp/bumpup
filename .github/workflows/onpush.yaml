@@ -35,7 +35,7 @@ jobs:
 #        with:
 #          deno-version: 'v1.x'
       - name: setup bumpup
-        uses: danielr1996/gh-actions-bumpup@v4
+        uses: danielr1996/gh-actions-bumpup@main
         with:
           version: ''
       - name: tag
