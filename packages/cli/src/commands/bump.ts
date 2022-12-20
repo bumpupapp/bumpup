@@ -6,10 +6,10 @@ import {importModule, ModuleBuildError} from "https://raw.githubusercontent.com/
 import {ConfigFileNotFoundError} from "../errors/ConfigFileNotFoundError.ts";
 import {PluginExecutionError} from "../../../lib/mod.ts";
 import {Logger} from "../../../../Logger.ts";
-import {set} from "https://esm.sh/lodash-es@4.17.21"
+import { lodash } from 'https://deno.land/x/deno_ts_lodash@0.0.1/mod.ts';
 
 export const parseAdditionalOptions = (args: string[]) =>{
-    return args.map(arg=>arg.split('=')).reduce((acc, [path,key])=>set(acc,path,key),{})
+    return args.map(arg=>arg.split('=')).reduce((acc, [path,key])=>lodash.set(acc,path,key),{})
 }
 
 export const action = async (_1: unknown, _2: unknown, command: Command) => {
