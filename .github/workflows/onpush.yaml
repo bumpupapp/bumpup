@@ -39,7 +39,7 @@ jobs:
         with:
           deno-version: 'v1.x'
       - name: setup bumpup
-        uses: danielr1996/gh-actions-bumpup@v9
+        uses: danielr1996/gh-actions-bumpup@v10
       - name: bump
         run: |
           bumpup bump -- determine.identifier=${{env.GITHUB_REF_SLUG}}
