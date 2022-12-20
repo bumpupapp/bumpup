@@ -6,6 +6,7 @@ export default (options: {author: {email: string, name: string}}) => async (data
   if (data.newVersion !== data.version) {
     const gitdir = await getGitSubmodulesDir('.git')
     await git.add({ fs,dir: Deno.cwd(), filepath: '.' });
+    //@ts-ignore: broken typings
     await git.commit({
       fs,
       author: options.author,

@@ -11,6 +11,6 @@ export default {
         [write, jsonOptions],
         [commit, gitOptions],
         [record, gitOptions],
-        ()=>(data)=>console.log(data),
+        (options)=>(data)=>console.log(options, data),
     ]
 }

@@ -28,6 +28,8 @@ jobs:
       #      - run: echo "${{secrets.PAT}}" > test.txt
       #      - run: cat test.txt
       #      - run: cat test.txt | sed -r 's/.{2}/&Ä/g'
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
       - name: checkout
         uses: actions/checkout@v3
         with:
@@ -37,22 +39,18 @@ jobs:
         with:
           deno-version: 'v1.x'
       - name: setup bumpup
-        uses: danielr1996/gh-actions-bumpup@v9
-      - run: cat version.json
+        uses: danielr1996/gh-actions-bumpup@v10
       - name: bump
-        run: bumpup bump
-      - run: cat version.json
+        run: |
+          bumpup bump -- determine.identifier=${{env.GITHUB_REF_SLUG}}
       - name: push
         run: | 
           git push
           git push --tags
       - name: build
         run: |
-          cat version.json
           deno run -A ci/build.ts
-          cat version.json
           deno run -A ci/copy.ts
-          cat version.json
           deno run -A ci/copyversions.ts
       - name: publish
         run: deno run -A ci/publish.ts
