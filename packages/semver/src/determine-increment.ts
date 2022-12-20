@@ -8,7 +8,7 @@ export const determineIncrement: BumpupFunction = (options) => (data) => {
       logger.log('info',`version doesn't exist in data`);
       return data;
     }
-    const newVersion = semver.increment(data.version, 'prerelease','beta') as string
+    const newVersion = semver.increment(data.version, 'prerelease',options?.determine?.identifier) as string
     return {newVersion}
   };
 
