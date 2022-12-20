@@ -44,8 +44,7 @@ jobs:
         uses: danielr1996/gh-actions-bumpup@v9
       - name: bump
         run: |
-          echo $SLUG_GITHUB_REF_NAME_SLUG
-          bumpup bump
+          bumpup bump -- determine.identifier=$SLUG_GITHUB_REF_NAME_SLUG
       - name: push
         run: | 
           git push
