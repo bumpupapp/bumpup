@@ -42,7 +42,7 @@ jobs:
         uses: danielr1996/gh-actions-bumpup@v10
       - name: bump
         run: |
-          if [[ ${{env.GITHUB_REF_SLUG}} -eq "main" ]]
+          if [[ "${{env.GITHUB_REF_SLUG}}" -eq "main" ]]
           then
             bumpup bump
           else
