@@ -42,7 +42,12 @@ jobs:
         uses: danielr1996/gh-actions-bumpup@v10
       - name: bump
         run: |
-          bumpup bump -- determine.identifier=${{env.GITHUB_REF_SLUG}}
+          if [[ ${{env.GITHUB_REF_SLUG}} -eq "main" ]]
+          then
+            bumpup bump
+          else
+            bumpup bump -- determine.identifier=${{env.GITHUB_REF_SLUG}}
+          fi
       - name: push
         run: | 
           git push
