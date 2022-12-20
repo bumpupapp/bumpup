@@ -1,6 +1,6 @@
 import {Command, Option} from '../../../deps.ts'
 import versionFile from "../../../version.json" assert { type: "json" };
-import {bump, init} from './commands/index.ts'
+import {bump, init, update} from './commands/index.ts'
 const program = new Command()
 program
     .name('bumpup')
@@ -11,4 +11,5 @@ program
     .addOption(new Option('-f, --file <file>').default('bumpup.config.ts'))
     .addCommand(bump, {isDefault: true})
     .addCommand(init)
+    .addCommand(update)
 await program.parseAsync()

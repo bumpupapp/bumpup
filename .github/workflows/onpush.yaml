@@ -21,13 +21,10 @@ jobs:
       - name: lint
         run: deno lint
   tag:
-    name: 'Tag'
+    name: 'Release'
     runs-on: 'ubuntu-latest'
     needs: ['qualitygate']
     steps:
-      #      - run: echo "${{secrets.PAT}}" > test.txt
-      #      - run: cat test.txt
-      #      - run: cat test.txt | sed -r 's/.{2}/&Ä/g'
       - name: checkout
         uses: actions/checkout@v3
         with:
